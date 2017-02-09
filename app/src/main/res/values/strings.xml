@@ -1,0 +1,125 @@
+<resources>
+    <string name="app_name">Find-It</string>
+
+    <!--Strings of Login Activity-->
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Senha</string>
+    <string name="create_account_button">Não possui uma conta? Crie uma agora!</string>
+    <string name="loading_label">Carregando...</string>
+    <string name="connect_button">Conectar</string>
+    <string name="continue_logged">Continuar Conectado</string>
+    <string name="forgot_password_button">Esqueci minha senha</string>
+    <string name="recover_button">Recuperar Senha</string>
+    <string name="sign_up_button">Cadastrar</string>
+    <string name="name_hint">Nome Completo</string>
+    <string name="contact_hint">Telefone de Contato</string>
+    <string name="repeat_password_hint">Repita a Senha</string>
+
+    <!--Strings of Main Activity-->
+    <string name="navigation_drawer_open">Abrir menu lateral</string>
+    <string name="navigation_drawer_close">Fechar menu lateral</string>
+    <string name="all_items">Meus Itens</string>
+    <string name="lost_item">Meus Itens Perdidos</string>
+    <string name="found_item">Meus Itens Encontrados</string>
+    <string name="returned_item">Meus Itens Devolvidos</string>
+    <string name="conversations">Minhas Conversas</string>
+    <string name="about_us">Sobre o Find-It</string>
+    <string name="faq">Perguntas Frequentes</string>
+    <string name="logoff">Desconectar</string>
+    <string-array name="nav_item_activity_titles">
+        <item>Find-It</item>
+        <item>@string/lost_item</item>
+        <item>@string/found_item</item>
+        <item>@string/returned_item</item>
+        <item>@string/conversations</item>
+    </string-array>
+    <string-array name="list_item_descriptions">
+        <item>Meus Itens :</item>
+        <item>Itens Perdidos :</item>
+        <item>Itens Encontrados :</item>
+        <item>Itens Devolvidos :</item>
+    </string-array>
+    <string name="not_results">Nenhum Item</string>
+    <string name="lbl_category">Categoria :\u0020</string>
+    <string name="lbl_status">Status :\u0020</string>
+    <string name="lbl_description">Descrição :\u0020</string>
+    <string name="lbl_photos">Fotos:</string>
+    <string name="no_photos">Nenhuma foto cadastrada</string>
+
+    <!--Strings of Exceptions-->
+    <string name="error_invalid_email">Digite um e-mail válido</string>
+    <string name="error_invalid_username">Digite um Nome com pelo menos 7 caracteres</string>
+    <string name="error_invalid_password">Digite uma senha com pelo menos 6 caracteres</string>
+    <string name="error_invalid_contact">Digite um contato válido</string>
+    <string name="error_repeat_password">As senhas não conferem</string>
+    <string name="error_incorrect_password">Senha incorreta!</string>
+    <string name="error_choose_category">Escolha uma categoria</string>
+    <string name="error_field_required">Campo Obrigatório</string>
+    <string name="error_reference_point">Insira um ponto de Referência onde o Item foi Encontrado/Perdido!</string>
+    <string name="error_reference_radius">Insira um Raio de Localização onde o Item foi Encontrado/Perdido!</string>
+    <string name="no_internet_connectivity">Sem conexão</string>
+
+    <!--String of Chat Activity-->
+    <string name="type_message_hint">Escreva uma mensagem</string>
+    <string name="not_online_status" formatted="false">Última vez online: %s</string>
+
+    <!--Strings of Profile Activity-->
+    <string name="title_activity_profile">Editar Perfil</string>
+    <string name="save_profile_button">Salvar Alterações</string>
+    <string name="save_profile_progress_dialog_title">Atualizando Perfil</string>
+    <string name="save_profile_progress_dialog_content">Espere por favor...</string>
+
+    <!--Strings of Context Menus-->
+    <string name="action_delete">Remover Item</string>
+    <string name="action_alter_status_item">Alterar Status do Item</string>
+    <string name="action_logoff">Desconectar</string>
+
+    <!--String of Activity ZoomImage-->
+    <string name="title_activity_zoom_image" formatted="false">Foto %d de %d</string>
+    <string name="title_activity_zoom_profile">Foto de Perfil</string>
+
+    <!--Strings of Alert Dialogs-->
+    <string name="lbl_alter">Alterar</string>
+    <string name="lbl_cancel">Cancelar</string>
+
+    <!--Strings of Insert Item Activity-->
+    <string name="title_activity_insert">Inserir Item</string>
+    <string name="choose_photos_item">Inserir fotos do Item</string>
+    <string name="name_item_hint">Nome do Item</string>
+    <string name="description_item_hint">Descrição do Item</string>
+    <string name="situation_item_hint">Situação do Item</string>
+    <string name="category_item_hint">Categoria do Item</string>
+    <string name="reference_point">Ponto de Referência</string>
+    <string name="insert_item_progress_dialog_title">Inserindo Item</string>
+    <string name="insert_item_progress_dialog_content">Espere por favor...</string>
+    <string name="insert_item_button">Cadastrar Item</string>
+    <string-array name="situation_item">
+        <item>Encontrado</item>
+        <item>Perdido</item>
+    </string-array>
+    <string-array name="category_item">
+        <item>Acessórios</item>
+        <item>Animais</item>
+        <item>Bolsas e Mochilas</item>
+        <item>Cadernos e Livros</item>
+        <item>Cartões e Documentos</item>
+        <item>Celulares e Smartphones</item>
+        <item>Chaves</item>
+        <item>Eletrônicos</item>
+        <item>Outros</item>
+    </string-array>
+
+    <!--Strings of Match Notification-->
+    <string name="title_match_notification">Match de Item</string>
+    <string name="simple_message_match_notification">Você teve Match(s) de Item(ns)</string>
+    <string name="first_message_match_notification" formatted="false">Você teve Match em %d Item(ns): </string>
+    <string name="message_match_notification" formatted="false">\"%s\" cadastrado como \"%s\"</string>
+    <string name="empty_list_message">Nenhuma conversa encontrada.\nQuando houver Match de Itens irão aparecer para conversar sobre o item que houve match</string>
+
+    <!--Strings of Messages Notification-->
+    <string name="title_notification_more_conversations" formatted="false">%d conversas e %d novas mensagens</string>
+    <string name="message_notification_more_conversations">Você recebeu novas mensagens</string>
+    <string name="message_notification" formatted="false">%d nova(s) mensagem(ns)</string>
+    <string name="action_notification_message">Responder</string>
+
+</resources>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/lost_and_found_item"
+            android:icon="@drawable/ic_all_items"
+            android:title="@string/all_items" />
+        <item
+            android:id="@+id/lost_item"
+            android:icon="@drawable/ic_lost"
+            android:title="@string/lost_item" />
+        <item
+            android:id="@+id/found_item"
+            android:icon="@drawable/ic_found"
+            android:title="@string/found_item" />
+        <item
+            android:id="@+id/returned_item"
+            android:icon="@drawable/ic_returned"
+            android:title="@string/returned_item" />
+        <item
+            android:id="@+id/conversations"
+            android:icon="@drawable/ic_comment"
+            android:title="@string/conversations" />
+    </group>
+    <item android:title="Outros">
+        <menu>
+            <item
+                android:id="@+id/nav_about_us"
+                android:title="@string/about_us" />
+            <item
+                android:id="@+id/faq"
+                android:title="@string/faq" />
+        </menu>
+    </item>
+</menu>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/ListItem"
+    android:background="@drawable/background_item_conversation"
+    android:paddingLeft="@dimen/list_item_side_margin"
+    android:paddingRight="@dimen/list_item_side_margin"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    tools:ignore="RtlHardcoded">
+
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/image_conversation"
+        style="@style/ListItemIconStyle"
+        android:src="@drawable/profile"
+        tools:ignore="ContentDescription" />
+
+    <LinearLayout
+        style="@style/WeightWidth"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/name_conversation"
+            android:textStyle="bold"
+            style="@style/DialogNameStyle" />
+
+        <TextView
+            android:id="@+id/last_message_conversation"
+            style="@style/DialogLastMessageStyle"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="55dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/list_item_side_margin"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/time_conversation"
+            android:layout_gravity="center"
+            style="@style/DialogTimeMessageStyle"/>
+
+        <TextView
+            android:id="@+id/unread_count_conversation"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            style="@style/DialogUnreadCounterStyle"/>
+    </LinearLayout>
+
+
+</LinearLayout>

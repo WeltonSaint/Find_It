@@ -1,0 +1,17 @@
+<resources>
+    <string name="mis_folder_all">Todas as Imagens</string>
+    <string name="mis_preview">Visualização</string>
+    <string name="mis_msg_no_camera">No system camera found</string>
+    <string name="mis_msg_amount_limit">A quantidade máxima de imagens selecionadas foi atingida</string>
+    <string name="mis_action_done">Concluído</string>
+    <string name="mis_action_button_string">%1$s(%2$d/%3$d)</string>
+    <string name="mis_photo_unit">Shot</string>
+    <string name="mis_tip_take_photo">Tire uma foto</string>
+    <string name="mis_error_image_not_exist">Image error</string>
+    <string name="mis_error_no_permission">Has no permission</string>
+    <string name="mis_permission_dialog_title">Permission Deny</string>
+    <string name="mis_permission_dialog_ok">Ok</string>
+    <string name="mis_permission_dialog_cancel">Cancelar</string>
+    <string name="mis_permission_rationale">Storage read permission is needed to pick files.</string>
+    <string name="mis_permission_rationale_write_storage">Storage write permission is needed to save the image.</string>
+</resources>

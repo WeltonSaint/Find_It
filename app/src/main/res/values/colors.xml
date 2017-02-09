@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#009687</color>
+    <color name="colorPrimaryDark">#00594f</color>
+    <color name="colorAccent">#33b5e6</color>
+    <color name="white">@android:color/white</color>
+    <color name="defaultTextDialog">#BDBDBD</color>
+    <color name="colorTextListItem">#9e9e9e</color>
+    <color name="colorBackgroundChat">#E5E5E5</color>
+    <color name="timestampColor">#979797</color>
+    <color name="textColorMediumDarkGrey">#747474</color>
+    <color name="textColorPrimary">#212121</color>
+</resources>
