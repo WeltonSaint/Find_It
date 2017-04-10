@@ -391,7 +391,7 @@ public class ChatActivity extends AppCompatActivity {
                                     mStatusChat.setText(status);
                                     mIconOnlineChat.setVisibility(View.VISIBLE);
                                 } else {
-                                    Date date = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss").parse(status);
+                                    Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(status);
                                     status = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(date);
                                     mStatusChat.setText(getString(R.string.not_online_status, status));
                                     mIconOnlineChat.setVisibility(View.GONE);

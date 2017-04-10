@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -25,7 +26,8 @@
                 android:clickable="true"
                 android:padding="10dp"
                 android:background="?android:selectableItemBackground"
-                android:layout_gravity="right" />
+                android:layout_gravity="end"
+                tools:ignore="ContentDescription" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -84,7 +86,7 @@
                     android:textColor="@color/colorTextListItem"
                     android:textSize="15.0dip" />
 
-                <View
+                <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="1.0dip"
                     android:layout_marginBottom="5dp"

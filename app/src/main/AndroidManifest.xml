@@ -24,7 +24,6 @@
         android:glEsVersion="0x00020000"
         android:required="true" />
 
-
     <application
         android:name=".FindIt"
         android:allowBackup="true"
@@ -35,7 +34,7 @@
         <activity
             android:name=".Activity.LoginActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/LoginTheme.NoActionBar">
+            android:theme="@style/LoginTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -44,7 +43,7 @@
         </activity>
         <activity
             android:name=".Activity.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/MainTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -52,7 +51,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity.ChatActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/LoginTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -62,6 +61,7 @@
         <activity
             android:name=".Activity.ProfileActivity"
             android:configChanges="orientation|screenSize"
+            android:theme="@style/AppTheme"
             android:label="@string/title_activity_profile">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -75,10 +75,9 @@
         </activity>
         <activity
             android:name=".Activity.ZoomImageActivity"
-            android:theme="@style/ZoomTheme.NoActionBar">
+            android:theme="@style/ZoomTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
 
@@ -91,6 +90,7 @@
             android:configChanges="orientation|screenSize" />
         <activity android:name=".Activity.InsertItemActivity"
             android:label="@string/title_activity_insert"
+            android:theme="@style/AppTheme"
             android:allowBackup="true"
             android:configChanges="orientation|screenSize"
             android:parentActivityName=".Activity.MainActivity">

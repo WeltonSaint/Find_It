@@ -35,7 +35,6 @@ import br.com.wellington.find_it.Utils.RecyclerItemClickListener;
 public class ListItemAdapter extends RecyclerView.Adapter<ListItemAdapter.ViewHolder> {
 
     private ArrayList<Item> items;
-    @SuppressLint("StaticFieldLeak")
     private static Context context;
 
     public ListItemAdapter(Context context, ArrayList<Item> items) {
@@ -45,13 +44,13 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemAdapter.ViewHo
 
     @Override
     public ListItemAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        @SuppressLint("InflateParams") View rootView = LayoutInflater.from(context).inflate(R.layout.list_item, null, false);
+        View rootView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_item, null, false);
+        context = viewGroup.getContext();
         RecyclerView.LayoutParams lp = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         rootView.setLayoutParams(lp);
         return new ViewHolder(rootView);
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(final ListItemAdapter.ViewHolder viewHolder, @SuppressLint("RecyclerView") final int i) {
         viewHolder.lbNome.setText(items.get(i).getNomeItem());

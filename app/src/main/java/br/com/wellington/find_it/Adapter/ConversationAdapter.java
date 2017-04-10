@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -104,6 +105,8 @@ public class ConversationAdapter extends BaseAdapter {
             holder.timeConversation.setTextColor(ContextCompat.getColor(context, R.color.textColorMediumDarkGrey));
         }
 
+        holder.iconOnlineConversation.setVisibility((chatConversation.isOnline()) ? View.VISIBLE : View.GONE);
+
         if (chatConversation.getLinkFotoCliente() != null && !chatConversation.getLinkFotoCliente().equals(""))
             Picasso.with(context).load(chatConversation.getLinkFotoCliente()).noFade().placeholder(R.drawable.profile).into(holder.imageConversation);
 
@@ -122,6 +125,7 @@ public class ConversationAdapter extends BaseAdapter {
         ViewHolder holder = new ViewHolder();
         holder.lastMessageConversation = (TextView) v.findViewById(R.id.last_message_conversation);
         holder.imageConversation = (CircleImageView) v.findViewById(R.id.image_conversation);
+        holder.iconOnlineConversation = (ImageView) v.findViewById(R.id.icon_online_conversation);
         holder.nameConversation = (TextView) v.findViewById(R.id.name_conversation);
         holder.timeConversation = (TextView) v.findViewById(R.id.time_conversation);
         holder.unreadCountConversation = (TextView) v.findViewById(R.id.unread_count_conversation);
@@ -132,6 +136,7 @@ public class ConversationAdapter extends BaseAdapter {
     private static class ViewHolder {
         private TextView lastMessageConversation;
         private CircleImageView imageConversation;
+        private ImageView iconOnlineConversation;
         private TextView nameConversation;
         private TextView timeConversation;
         private TextView unreadCountConversation;

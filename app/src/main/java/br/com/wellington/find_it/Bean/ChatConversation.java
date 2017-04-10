@@ -17,6 +17,7 @@ public class ChatConversation implements Serializable{
     private String linkFotoCliente;
     private String ultimaMensagem;
     private int novasMensagens;
+    private boolean online;
     private String dataUltimaMensagem;
 
     public ChatConversation() {
@@ -76,6 +77,14 @@ public class ChatConversation implements Serializable{
 
     public void setNovasMensagens(int novasMensagens) {
         this.novasMensagens = novasMensagens;
+    }
+
+    public boolean isOnline() {
+        return online;
+    }
+
+    public void setOnline(boolean online) {
+        this.online = online;
     }
 
     public String getDataUltimaMensagem() {

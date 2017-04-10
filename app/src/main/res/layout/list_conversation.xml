@@ -9,11 +9,30 @@
     android:paddingBottom="5dp"
     tools:ignore="RtlHardcoded">
 
-    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/image_conversation"
-        style="@style/ListItemIconStyle"
-        android:src="@drawable/profile"
-        tools:ignore="ContentDescription" />
+    <RelativeLayout
+        style="@style/ListItemIconStyle">
+
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/image_conversation"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:src="@drawable/profile"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/icon_online_conversation"
+            android:layout_width="19dp"
+            android:layout_height="19dp"
+            android:layout_alignBottom="@+id/image_conversation"
+            android:layout_alignRight="@+id/image_conversation"
+            android:layout_marginLeft="34dp"
+            android:layout_marginTop="34dp"
+            android:src="@drawable/ic_online_conversation"
+            android:visibility="gone"
+            tools:ignore="ContentDescription"/>
+
+    </RelativeLayout>
+
 
     <LinearLayout
         style="@style/WeightWidth"
@@ -38,8 +57,8 @@
 
         <TextView
             android:id="@+id/time_conversation"
-            android:layout_gravity="center"
-            style="@style/DialogTimeMessageStyle"/>
+            style="@style/DialogTimeMessageStyle"
+            android:layout_gravity="right" />
 
         <TextView
             android:id="@+id/unread_count_conversation"

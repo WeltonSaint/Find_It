@@ -135,7 +135,7 @@ public class ConversationsFragment extends Fragment implements AdapterView.OnIte
                             @Override
                             public void onResponse(String s) {
                                 //Disimissing the progress dialog
-                                if(isAdded())
+                                if(getActivity() != null && isAdded())
                                     showProgress(false);
 
                                 mAdapterConversation = new ConversationAdapter(getActivity(), new ArrayList<ChatConversation>());
@@ -169,6 +169,7 @@ public class ConversationsFragment extends Fragment implements AdapterView.OnIte
                                         conv.setUltimaMensagem(jObject.getString("ultimaMensagem"));
                                         conv.setDataUltimaMensagem(jObject.getString("dataEnvio"));
                                         conv.setNovasMensagens(jObject.getInt("novasMensagens"));
+                                        conv.setOnline(jObject.getString("ultimaAtividade").equals("Online"));
 
                                         not |= (conv.getNovasMensagens() > 0);
 
@@ -188,7 +189,8 @@ public class ConversationsFragment extends Fragment implements AdapterView.OnIte
                             @Override
                             public void onErrorResponse(VolleyError volleyError) {
                                 //Dismissing the progress dialog and show Toast
-                                showProgress(false);
+                                if(getActivity() != null && isAdded())
+                                    showProgress(false);
                                 //Toast.makeText(getActivity(), volleyError.getMessage().toString(), Toast.LENGTH_SHORT).show();
                             }
                         }) {
@@ -244,7 +246,6 @@ public class ConversationsFragment extends Fragment implements AdapterView.OnIte
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
             mListConversationView.setVisibility(show ? View.GONE : View.VISIBLE);
@@ -264,10 +265,6 @@ public class ConversationsFragment extends Fragment implements AdapterView.OnIte
                     mConversationProgress.setVisibility(show ? View.VISIBLE : View.GONE);
                 }
             });
-        } else {
-            mConversationProgress.setVisibility(show ? View.VISIBLE : View.GONE);
-            mListConversationView.setVisibility(show ? View.GONE : View.VISIBLE);
-        }
     }
 
     @Override
