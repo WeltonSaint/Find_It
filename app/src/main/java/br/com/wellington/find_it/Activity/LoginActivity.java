@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,6 +19,7 @@ import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatEditText;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.view.WindowManager;
@@ -37,12 +39,24 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+import com.facebook.Profile;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.Map;
 
@@ -58,15 +72,18 @@ public class LoginActivity extends AppCompatActivity {
     private final static int LOGIN_ACTION = 0;
     private final static int FORGOT_ACTION = 1;
     private final static int SIGN_UP_ACTION = 2;
+    private CallbackManager callbackManager;
 
     // UI Elements
     private LinearLayout mLoginStatus, mLoginForm, mForgotForm, mSignUpForm;
     private TextInputLayout mEmailLoginTextInputLayout, mPasswordLoginTextInputLayout, mEmailForgotTextInputLayout, mNameSignUpTextInputLayout, mEmailSignUpTextInputLayout, mContactSignUpTextInputLayout, mPasswordSignUpTextInputLayout, mRepeatPasswordSignUpTextInputLayout;
     private AppCompatEditText mEmailLogin, mPasswordLogin, mEmailForgot, mNameSignUp, mEmailSignUp, mContactSignUp, mPasswordSignUp, mRepeatPasswordSignUp;
     private Animation animTranslate, animFadeOut, animFadeIn, animFadeOutForms, animFadeInForms;
+    private LoginButton mLoginFacebookButton;
     private ScrollView mScrollingLogin;
     private ImageView mLogo;
     private TextView mNameAppLabel;
+    private ProgressDialog progressDialog;
     private AppCompatCheckBox mContinueLoggedCheckbox;
 
 
@@ -95,7 +112,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @SuppressLint("HardwareIds")
-    private String getPhoneNumber(){
+    private String getPhoneNumber() {
         TelephonyManager telemamanger = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         return telemamanger.getLine1Number();
     }
@@ -114,12 +131,19 @@ public class LoginActivity extends AppCompatActivity {
     private void initLoginForm() {
 
         mLoginForm = (LinearLayout) findViewById(R.id.login_form);
+
+        callbackManager = CallbackManager.Factory.create();
+
         mEmailLogin = (AppCompatEditText) findViewById(R.id.email_login);
         mEmailLoginTextInputLayout = (TextInputLayout) findViewById(R.id.email_login_text_input_layout);
         mPasswordLogin = (AppCompatEditText) findViewById(R.id.password_login);
         mPasswordLoginTextInputLayout = (TextInputLayout) findViewById(R.id.password_login_text_input_layout);
         mContinueLoggedCheckbox = (AppCompatCheckBox) findViewById(R.id.continue_logged_checkbox);
         AppCompatButton mForgotPasswordButton = (AppCompatButton) findViewById(R.id.forgot_password_button);
+        mLoginFacebookButton = (LoginButton) findViewById(R.id.login_facebook_button);
+        mLoginFacebookButton.setReadPermissions("public_profile");
+        mLoginFacebookButton.setReadPermissions("email");
+
         mForgotPasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -207,6 +231,19 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        mLoginFacebookButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                progressDialog = new ProgressDialog(LoginActivity.this);
+                progressDialog.setMessage(getString(R.string.loading_label));
+                progressDialog.show();
+                mLoginFacebookButton.registerCallback(callbackManager, mCallBack);
+
+            }
+        });
+
+
     }
 
     private void initForgotForm() {
@@ -270,8 +307,8 @@ public class LoginActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                if(ConnectionManagement.isConnected(getApplicationContext())){
-                                    if(ConnectionManagement.isPasswordSave(getApplicationContext())){
+                                if (ConnectionManagement.isConnected(getApplicationContext())) {
+                                    if (ConnectionManagement.isPasswordSave(getApplicationContext())) {
                                         loginRequest(ConnectionManagement.getLoginSave(getApplicationContext()).toLowerCase(), ConnectionManagement.getPasswordSave(getApplicationContext()));
                                     } else {
                                         mLoginForm.setVisibility(View.VISIBLE);
@@ -279,7 +316,7 @@ public class LoginActivity extends AppCompatActivity {
                                     }
                                 } else {
                                     ConnectionManagement.showIsNotConected(LoginActivity.this);
-                                    if(ConnectionManagement.isPasswordSave(getApplicationContext())){
+                                    if (ConnectionManagement.isPasswordSave(getApplicationContext())) {
                                         mEmailLogin.setText(ConnectionManagement.getLoginSave(getApplicationContext()));
                                     }
                                     mLoginForm.setVisibility(View.VISIBLE);
@@ -292,6 +329,64 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }, 3000);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+
+    private FacebookCallback<LoginResult> mCallBack = new FacebookCallback<LoginResult>() {
+        @Override
+        public void onSuccess(LoginResult loginResult) {
+
+            progressDialog.dismiss();
+
+            // App code
+            new GraphRequest(AccessToken.getCurrentAccessToken(), "/me/permissions/", null, HttpMethod.DELETE, new GraphRequest
+                    .Callback() {
+                @Override
+                public void onCompleted(GraphResponse graphResponse) {
+
+                    LoginManager.getInstance().logOut();
+
+                }
+            }).executeAsync();
+
+            GraphRequest request = GraphRequest.newMeRequest(
+                    loginResult.getAccessToken(),
+                    new GraphRequest.GraphJSONObjectCallback() {
+                        @Override
+                        public void onCompleted(
+                                JSONObject object,
+                                GraphResponse response) {
+                            try {
+                                loginFacebookRequest(object.getString("name").toString(), object.getString("email").toString().toLowerCase(), Profile.getCurrentProfile().getProfilePictureUri(400, 400).toString());
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                    });
+
+            Bundle parameters = new Bundle();
+            parameters.putString("fields", "id,name,email,gender, birthday");
+            request.setParameters(parameters);
+            request.executeAsync();
+        }
+
+        @Override
+        public void onCancel() {
+            progressDialog.dismiss();
+        }
+
+        @Override
+        public void onError(FacebookException e) {
+            progressDialog.dismiss();
+        }
+    };
 
     private void login() {
         boolean valid = true;
@@ -317,7 +412,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if (valid) {
             try {
-                loginRequest( mEmailLogin.getText().toString().trim().toLowerCase(), SimpleSHA1.SHA1(mPasswordLogin.getText().toString().trim()));
+                loginRequest(mEmailLogin.getText().toString().trim().toLowerCase(), SimpleSHA1.SHA1(mPasswordLogin.getText().toString().trim()));
             } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
@@ -473,6 +568,72 @@ public class LoginActivity extends AppCompatActivity {
                 params.put("emailCliente", email);
                 params.put("senhaCliente", password);
 
+
+                //returning parameters
+                return params;
+            }
+        };
+
+        //Creating a Request Queue
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+
+        //Adding request to the queue
+        requestQueue.add(stringRequest);
+    }
+
+    private void loginFacebookRequest(final String name, final String email, final String linkUserPicture) {
+        showProgress(true, LOGIN_ACTION);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, SERVICE_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        showProgress(false, LOGIN_ACTION);
+                        //Showing toast message of the response
+                        try {
+                            JSONObject jsonObject = new JSONObject(s);
+                            if (jsonObject.getBoolean("error")) {
+                                AlertDialog.Builder dlg = new AlertDialog.Builder(LoginActivity.this);
+                                dlg.setMessage(jsonObject.getString("message"));
+                                dlg.setPositiveButton("Ok", null);
+                                dlg.show();
+                            } else {
+                                Intent intent = new Intent();
+                                Bundle bundle = new Bundle();
+
+                                JSONObject jsonClient = jsonObject.getJSONObject("client");
+                                Cliente user = new Cliente(jsonClient.getLong("codigoCliente"), jsonClient.getString("nomeCliente"), jsonClient.getString("emailCliente"), jsonClient.getString("senhaCliente"), jsonClient.getString("contatoCliente"));
+                                ConnectionManagement.savePreferences(user.getEmailCliente(), user.getSenhaCliente(), getApplicationContext());
+                                user.setLinkFotoPerfilCliente(jsonClient.getString("linkFotoCliente"));
+
+                                bundle.putSerializable("user", user);
+                                intent.putExtras(bundle);
+                                intent.setClass(LoginActivity.this, MainActivity.class);
+                                finish();
+                                startActivity(intent);
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        Toast.makeText(getApplicationContext(), volleyError.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> params = new Hashtable<>();
+
+                //Adding parameters
+                params.put("action", "loginWithFacebook");
+                params.put("nomeCliente", name);
+                params.put("emailCliente", email);
+                params.put("linkFotoCliente", linkUserPicture);
 
                 //returning parameters
                 return params;

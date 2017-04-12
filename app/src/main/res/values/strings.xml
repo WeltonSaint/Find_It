@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Find-It</string>
 
+    <!--Key Facebook-->
+    <string name="facebook_app_id">425799767796680</string>
+
     <!--Strings of Login Activity-->
     <string name="email_hint">Email</string>
     <string name="password_hint">Senha</string>
@@ -9,6 +12,7 @@
     <string name="connect_button">Conectar</string>
     <string name="continue_logged">Continuar Conectado</string>
     <string name="forgot_password_button">Esqueci minha senha</string>
+    <string name="divider_or">ou</string>
     <string name="recover_button">Recuperar Senha</string>
     <string name="sign_up_button">Cadastrar</string>
     <string name="name_hint">Nome Completo</string>
