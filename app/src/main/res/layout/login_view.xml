@@ -42,6 +42,8 @@
                     android:drawablePadding="5dp"
                     android:ems="10"
                     android:hint="@string/email_hint"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:inputType="textEmailAddress"
                     android:textCursorDrawable="@null"
                     android:typeface="sans"
@@ -61,6 +63,8 @@
                 android:layout_gravity="center"
                 android:paddingLeft="10.0dip"
                 android:paddingRight="10.0dip"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:paddingTop="2.0dip"
                 android:theme="@style/AppTheme">
 
@@ -74,6 +78,8 @@
                     android:ems="10"
                     android:hint="@string/password_hint"
                     android:inputType="textPassword"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:textCursorDrawable="@null"
                     android:typeface="sans"
                     app:backgroundTint="@android:color/white" />
@@ -165,6 +171,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
+            android:textAllCaps="true"
             android:id="@+id/login_facebook_button"
             android:ems="12" />
 

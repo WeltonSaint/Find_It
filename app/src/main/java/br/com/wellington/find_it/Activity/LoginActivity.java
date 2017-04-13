@@ -81,9 +81,8 @@ public class LoginActivity extends AppCompatActivity {
     private Animation animTranslate, animFadeOut, animFadeIn, animFadeOutForms, animFadeInForms;
     private LoginButton mLoginFacebookButton;
     private ScrollView mScrollingLogin;
-    private ImageView mLogo;
+    private ImageView mLogo, mLogoHide;
     private TextView mNameAppLabel;
-    private ProgressDialog progressDialog;
     private AppCompatCheckBox mContinueLoggedCheckbox;
 
 
@@ -95,6 +94,9 @@ public class LoginActivity extends AppCompatActivity {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             getWindow().setStatusBarColor(ContextCompat.getColor(this.getApplicationContext(), R.color.colorPrimaryDark));
         }
+
+        mLogo = (ImageView) findViewById(R.id.logo);
+        mLogoHide = (ImageView) findViewById(R.id.logo_hide);
 
         // Status
         initStatusScreen();
@@ -234,10 +236,6 @@ public class LoginActivity extends AppCompatActivity {
         mLoginFacebookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                progressDialog = new ProgressDialog(LoginActivity.this);
-                progressDialog.setMessage(getString(R.string.loading_label));
-                progressDialog.show();
                 mLoginFacebookButton.registerCallback(callbackManager, mCallBack);
 
             }
@@ -251,6 +249,7 @@ public class LoginActivity extends AppCompatActivity {
         mEmailForgot = (AppCompatEditText) findViewById(R.id.email_forgot);
         mEmailForgotTextInputLayout = (TextInputLayout) findViewById(R.id.email_forgot_text_input_layout);
         AppCompatButton mForgotSubmit = (AppCompatButton) findViewById(R.id.forgot_submit);
+
         mForgotSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -262,6 +261,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     private void initSignUpForm() {
         mSignUpForm = (LinearLayout) findViewById(R.id.sign_up_form);
@@ -276,6 +277,7 @@ public class LoginActivity extends AppCompatActivity {
         mRepeatPasswordSignUp = (AppCompatEditText) findViewById(R.id.repeat_password_sign_up);
         mRepeatPasswordSignUpTextInputLayout = (TextInputLayout) findViewById(R.id.repeat_password_sign_up_text_input_layout);
         AppCompatButton mSignUpSubmit = (AppCompatButton) findViewById(R.id.sign_up_submit);
+
         mSignUpSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -324,7 +326,6 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             }
                         });
-                        mLogo = (ImageView) findViewById(R.id.logo);
                         mLogo.startAnimation(animTranslate);
                     }
                 }, 3000);
@@ -341,8 +342,6 @@ public class LoginActivity extends AppCompatActivity {
     private FacebookCallback<LoginResult> mCallBack = new FacebookCallback<LoginResult>() {
         @Override
         public void onSuccess(LoginResult loginResult) {
-
-            progressDialog.dismiss();
 
             // App code
             new GraphRequest(AccessToken.getCurrentAccessToken(), "/me/permissions/", null, HttpMethod.DELETE, new GraphRequest
@@ -379,13 +378,11 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         public void onCancel() {
-            progressDialog.dismiss();
-        }
+                    }
 
         @Override
         public void onError(FacebookException e) {
-            progressDialog.dismiss();
-        }
+                    }
     };
 
     private void login() {

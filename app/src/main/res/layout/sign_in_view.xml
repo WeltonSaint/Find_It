@@ -48,6 +48,8 @@
                         android:drawableStart="@drawable/ic_name"
                         android:ems="10"
                         android:hint="@string/name_hint"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
                         android:inputType="textPersonName"
                         android:textCursorDrawable="@null"
                         android:typeface="sans" />
@@ -79,6 +81,8 @@
                         android:drawableStart="@drawable/ic_email"
                         android:ems="10"
                         android:hint="@string/email_hint"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
                         android:inputType="textEmailAddress"
                         android:textCursorDrawable="@null"
                         android:typeface="sans" />
@@ -111,6 +115,8 @@
                         android:ems="10"
                         android:hint="@string/contact_hint"
                         android:inputType="phone"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
                         android:textCursorDrawable="@null"
                         android:typeface="sans" />
                 </android.support.design.widget.TextInputLayout>
@@ -141,6 +147,8 @@
                         android:drawablePadding="5dp"
                         android:ems="10"
                         android:hint="@string/password_hint"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
                         android:inputType="textPassword"
                         android:textCursorDrawable="@null"
                         android:typeface="sans" />
@@ -174,6 +182,8 @@
                         android:drawablePadding="5dp"
                         android:ems="10"
                         android:hint="@string/repeat_password_hint"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
                         android:inputType="textPassword"
                         android:textCursorDrawable="@null"
                         android:typeface="sans" />

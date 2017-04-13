@@ -25,13 +25,13 @@
             android:layout_width="wrap_content"
             android:theme="@style/LoginTheme"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8.0dip" />
+            android:layout_marginBottom="8.0sp" />
 
         <TextView
             android:id="@+id/login_status_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16.0dip"
+            android:layout_marginBottom="16.0sp"
             android:fontFamily="sans-serif-light"
             android:text="@string/loading_label"
             android:textAppearance="?android:textAppearanceMedium"
@@ -57,7 +57,7 @@
         android:adjustViewBounds="true"
         android:src="@drawable/app_logo"
         android:visibility="invisible"
-        android:layout_marginBottom="@dimen/margin_bottom_logo"
+        android:layout_marginBottom="@dimen/margin_bottom_logo_xlarge"
         tools:ignore="ContentDescription" />
 
     <TextView
@@ -66,12 +66,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50.0dip"
+        android:layout_marginBottom="50.0sp"
         android:background="@android:color/transparent"
         android:text="@string/app_name"
         android:textAppearance="?android:textAppearanceLarge"
         android:textColor="@color/white"
-        android:textSize="35.0dip"
+        android:textSize="35.0sp"
         android:textStyle="bold|italic" />
 
     <include
