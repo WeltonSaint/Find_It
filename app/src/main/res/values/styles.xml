@@ -128,7 +128,6 @@
     <style name="DialogUnreadCounterStyle">
         <item name="android:layout_width">25dp</item>
         <item name="android:layout_height">25dp</item>
-        <item name="android:layout_marginTop">5dp</item>
         <item name="android:background">@drawable/shape_circle</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/white</item>
